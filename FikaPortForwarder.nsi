@@ -30,7 +30,7 @@ Section SPTcheck
     MessageBox MB_ICONINFORMATION|MB_OK "AKI.server.exe found."
 NoAKIServerFound:
     StrCpy $AKIServerFound 0
-    MessageBox MB_ICONSTOP|MB_OK "AKI.server.exe not found.\nYou must install SPT first or put this installer in the same directory as AKI.server.exe."
+    MessageBox MB_ICONSTOP|MB_OK "AKI.server.exe not found. You must install SPT first or put this installer in the same directory as AKI.server.exe."
     Abort ; Quit installer if AKI.server.exe not found
 SectionEnd
 
@@ -39,7 +39,7 @@ Section EFTcheck
     IfFileExists "EscapeFromTarkov.exe" 0 NoEFTFound
     MessageBox MB_ICONINFORMATION|MB_OK "EscapeFromTarkov.exe found. Generating files, please wait..."
 NoEFTFound:
-    MessageBox MB_ICONSTOP|MB_OK "EscapeFromTarkov.exe not found.\nPut this installer in the same directory as EscapeFromTarkov.exe."
+    MessageBox MB_ICONSTOP|MB_OK "EscapeFromTarkov.exe not found. Put this installer in the same directory as EscapeFromTarkov.exe."
     Abort ; Quit installer if EscapeFromTarkov.exe not found
 SectionEnd
 

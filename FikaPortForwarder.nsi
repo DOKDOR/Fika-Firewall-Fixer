@@ -8,19 +8,10 @@ OutFile "FikaPF.exe"
 InstallDir "$EXEDIR"
 
 ; Welcome page
-!define MUI_WELCOMEPAGE_TEXT "Welcome to DOKDORs Fika Port Forwarder"
+!define MUI_WELCOMEPAGE_TEXT "Welcome to DOKDORs Fika Port Forwarder. This will automatically add firewwll rules needed to host and play Fika."
 
 ; Interface for the welcome page
 !insertmacro MUI_PAGE_WELCOME
-
-; Button to go to the next page
-!insertmacro MUI_PAGE_INSTFILES
-
-; Interface for the components selection page
-!insertmacro MUI_PAGE_COMPONENTS
-
-; Define the language for the installer
-!insertmacro MUI_LANGUAGE "English"
 
 Section SPTcheck
     ; Check if AKI.server.exe is present in the same directory

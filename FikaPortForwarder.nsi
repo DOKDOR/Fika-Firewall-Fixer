@@ -37,7 +37,7 @@ SectionEnd
 Section EFTcheck
     ; Check if EscapeFromTarkov.exe is present in the same directory
     IfFileExists "EscapeFromTarkov.exe" 0 NoEFTFound
-    MessageBox MB_ICONINFORMATION|MB_OK "EscapeFromTarkov.exe found. Generating files, please wait..."
+    MessageBox MB_ICONINFORMATION|MB_OK "EscapeFromTarkov.exe found."
 NoEFTFound:
     MessageBox MB_ICONSTOP|MB_OK "EscapeFromTarkov.exe not found. Put this installer in the same directory as EscapeFromTarkov.exe."
     Abort ; Quit installer if EscapeFromTarkov.exe not found

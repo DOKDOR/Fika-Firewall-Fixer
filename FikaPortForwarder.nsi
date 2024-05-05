@@ -22,25 +22,24 @@ InstallDir "$EXEDIR"
 ; Define the language for the installer
 !insertmacro MUI_LANGUAGE "English"
 
-Var AKIServerFound
-
 Section SPTcheck
     ; Check if AKI.server.exe is present in the same directory
-    IfFileExists "AKI.server.exe" 0 NoAKIServerFound
+    IfFileExists "AKI.server.exe" AKIFound NoAKIServerFound
     MessageBox MB_ICONINFORMATION|MB_OK "AKI.server.exe found."
 NoAKIServerFound:
-    StrCpy $AKIServerFound 0
     MessageBox MB_ICONSTOP|MB_OK "AKI.server.exe not found. You must install SPT first or put this installer in the same directory as AKI.server.exe."
     Abort ; Quit installer if AKI.server.exe not found
+AKIFound:
 SectionEnd
 
 Section EFTcheck
     ; Check if EscapeFromTarkov.exe is present in the same directory
-    IfFileExists "EscapeFromTarkov.exe" 0 NoEFTFound
+    IfFileExists "EscapeFromTarkov.exe" EFTFound NoEFTFound
     MessageBox MB_ICONINFORMATION|MB_OK "EscapeFromTarkov.exe found."
 NoEFTFound:
     MessageBox MB_ICONSTOP|MB_OK "EscapeFromTarkov.exe not found. Put this installer in the same directory as EscapeFromTarkov.exe."
     Abort ; Quit installer if EscapeFromTarkov.exe not found
+EFTFound:
 SectionEnd
 
 Section FIREWALL

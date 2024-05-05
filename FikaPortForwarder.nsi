@@ -13,6 +13,12 @@ InstallDir "$EXEDIR"
 ; Interface for the welcome page
 !insertmacro MUI_PAGE_WELCOME
 
+; Button to go to the next page
+!insertmacro MUI_PAGE_INSTFILES
+
+; Define the language for the installer
+!insertmacro MUI_LANGUAGE "English"
+
 Section SPTcheck
     ; Check if AKI.server.exe is present in the same directory
     IfFileExists "AKI.server.exe" AKIFound NoAKIServerFound

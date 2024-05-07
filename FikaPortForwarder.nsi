@@ -40,8 +40,14 @@ EFTFound:
 SectionEnd
 
 Section FIREWALL
+		; Remove all old rules for ports 6969 and 25565. look for and remove any rules related to EFT and AKI frok the current directory. 
+		DetailPrint "Remove old firewall rules..."
+		ExecWait 'powershell Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 6969 | Remove-NetFirewallRule'
+		ExecWait 'powershell Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 25565 | Remove-NetFirewallRule'
+		ExecWait 'powershell Get-NetFirewallApplicationFilter | Where-Object -Program "$EXEDIR/EscapeFromTarkov.exe" | Remove-NetFirewallRule'
+		ExecWait 'powershell Get-NetFirewallApplicationFilter | Where-Object -Program "$EXEDIR/AKI.server.exe" | Remove-NetFirewallRule'
     ; Add firewall rules for TCP 6969, UDP 25565, EFT and AKI. 
-    DetailPrint "Adding firewall rules..."
+	DetailPrint "Adding firewall rules..."
     ExecWait 'netsh advfirewall firewall add rule name="TCP 6969 IN" dir=in action=allow protocol=TCP localport=6969 enable=yes profile=public,private'
     ExecWait 'netsh advfirewall firewall add rule name="TCP 6969 OUT" dir=out action=allow protocol=TCP localport=6969 enable=yes profile=public,private'
     ExecWait 'netsh advfirewall firewall add rule name="UDP 25565 IN" dir=in action=allow protocol=UDP localport=25565 enable=yes profile=public,private'

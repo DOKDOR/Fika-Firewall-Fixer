@@ -42,18 +42,18 @@ SectionEnd
 Section FIREWALL
 		; Remove all old rules for ports 6969 and 25565. look for and remove any rules related to EFT and AKI frok the current directory. 
 		DetailPrint "Remove old firewall rules..."
-		ExecWait 'powershell Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 6969 | Remove-NetFirewallRule'
-		ExecWait 'powershell Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 25565 | Remove-NetFirewallRule'
-		ExecWait 'powershell Get-NetFirewallApplicationFilter | Where-Object -Program "$EXEDIR/EscapeFromTarkov.exe" | Remove-NetFirewallRule'
-		ExecWait 'powershell Get-NetFirewallApplicationFilter | Where-Object -Program "$EXEDIR/AKI.server.exe" | Remove-NetFirewallRule'
+		nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 6969 | Remove-NetFirewallRule'
+		nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 25565 | Remove-NetFirewallRule'
+		nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\AKI.server.exe" | Remove-NetFirewallRule'
+		nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\EscapeFromTarkov.exe" | Remove-NetFirewallRule'
     ; Add firewall rules for TCP 6969, UDP 25565, EFT and AKI. 
 	DetailPrint "Adding firewall rules..."
-    ExecWait 'netsh advfirewall firewall add rule name="TCP 6969 IN" dir=in action=allow protocol=TCP localport=6969 enable=yes profile=public,private'
-    ExecWait 'netsh advfirewall firewall add rule name="TCP 6969 OUT" dir=out action=allow protocol=TCP localport=6969 enable=yes profile=public,private'
-    ExecWait 'netsh advfirewall firewall add rule name="UDP 25565 IN" dir=in action=allow protocol=UDP localport=25565 enable=yes profile=public,private'
-    ExecWait 'netsh advfirewall firewall add rule name="UDP 25565 OUT" dir=out action=allow protocol=UDP localport=25565 enable=yes profile=public,private'
-		ExecWait 'netsh advfirewall firewall add rule name="Tarkov IN" dir=in action=allow program="$EXEDIR\EscapeFromTarkov.exe" enable=yes profile=public,private'
-		ExecWait 'netsh advfirewall firewall add rule name="Tarkov OUT" dir=out action=allow program="$EXEDIR\EscapeFromTarkov.exe" enable=yes profile=public,private'
-		ExecWait 'netsh advfirewall firewall add rule name="AKI.SERVER IN" dir=in action=allow program="$EXEDIR\AKI.server.exe" enable=yes profile=public,private'
-		ExecWait 'netsh advfirewall firewall add rule name="AKI.SERVER OUT" dir=out action=allow program="$EXEDIR\AKI.server.exe" enable=yes profile=public,private'
+    nsExec::Exec 'netsh advfirewall firewall add rule name="TCP 6969 IN" dir=in action=allow protocol=TCP localport=6969 enable=yes profile=public,private' SILENT
+    nsExec::Exec 'netsh advfirewall firewall add rule name="TCP 6969 OUT" dir=out action=allow protocol=TCP localport=6969 enable=yes profile=public,private'
+    nsExec::Exec 'netsh advfirewall firewall add rule name="UDP 25565 IN" dir=in action=allow protocol=UDP localport=25565 enable=yes profile=public,private'
+    nsExec::Exec 'netsh advfirewall firewall add rule name="UDP 25565 OUT" dir=out action=allow protocol=UDP localport=25565 enable=yes profile=public,private'
+		nsExec::Exec 'netsh advfirewall firewall add rule name="Tarkov IN" dir=in action=allow program="$EXEDIR\EscapeFromTarkov.exe" enable=yes profile=public,private'
+		nsExec::Exec 'netsh advfirewall firewall add rule name="Tarkov OUT" dir=out action=allow program="$EXEDIR\EscapeFromTarkov.exe" enable=yes profile=public,private'
+		nsExec::Exec 'netsh advfirewall firewall add rule name="AKI.SERVER IN" dir=in action=allow program="$EXEDIR\AKI.server.exe" enable=yes profile=public,private'
+		nsExec::Exec 'netsh advfirewall firewall add rule name="AKI.SERVER OUT" dir=out action=allow program="$EXEDIR\AKI.server.exe" enable=yes profile=public,private'
 SectionEnd

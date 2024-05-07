@@ -13,6 +13,6 @@ jobs:
       run: choco install nsis
 
     - name: Build Installer
-      run: makensis FikaPortForwarder.nsi
+      run: makensis FikaFirewallFixer.nsi
 
     # Add additional steps to execute the installer and perform tests

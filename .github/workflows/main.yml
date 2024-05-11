@@ -16,7 +16,7 @@ jobs:
       run: makensis FikaFirewallFixer.nsi
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
-        name: FikaFirewallFixer.exe
+        name: FikaFirewallFixer
         path: FikaFirewallFixer.exe

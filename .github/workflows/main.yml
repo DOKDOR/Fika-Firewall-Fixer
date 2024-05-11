@@ -15,4 +15,8 @@ jobs:
     - name: Build Installer
       run: makensis FikaFirewallFixer.nsi
 
-    # Add additional steps to execute the installer and perform tests
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: FikaFirewallFixer.exe
+        path: FikaFirewallFixer.exe

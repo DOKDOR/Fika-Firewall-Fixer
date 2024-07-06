@@ -48,13 +48,15 @@ EFTFound:
 SectionEnd
 
 Section FIREWALL
-	; Remove all old rules for ports 6969 and 25565. Look for and remove any rules related to EFT and SPT from the current directory. 
+	; Remove all old rules for ports 6969 and 25565. Look for and remove any rules related to EFT and SPT (including old AKI files!) from the current directory. 
 	DetailPrint "Remove old firewall rules..."
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 6969 | Remove-NetFirewallRule'
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallPortFilter | Where-Object -Property LocalPort -EQ 25565 | Remove-NetFirewallRule'
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\SPT.Server.exe" | Remove-NetFirewallRule'
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\EscapeFromTarkov.exe" | Remove-NetFirewallRule'
-	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\SPT.launcher.exe" | Remove-NetFirewallRule'
+	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\SPT.Launcher.exe" | Remove-NetFirewallRule'
+	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\Aki.Server.exe" | Remove-NetFirewallRule'
+	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\Aki.Launcher.exe" | Remove-NetFirewallRule'
     ; Add firewall rules for TCP 6969, UDP 25565, EFT and SPT. 
 	DetailPrint "Adding firewall rules..."
 	nsExec::Exec 'netsh advfirewall firewall add rule name="FIKA TCP 6969 IN" dir=in action=allow protocol=TCP localport=6969 enable=yes profile=public,private' SILENT

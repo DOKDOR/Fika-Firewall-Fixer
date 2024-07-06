@@ -9,7 +9,7 @@ OutFile "FikaFirewallFixer.exe"
 InstallDir "$EXEDIR"
 
 ; Welcome page text
-!define MUI_WELCOMEPAGE_TEXT "Welcome to DOKDOR's Fika Firewall Fixer. This will automatically remove any old broken rules, and add all the firewall rules needed to host and play Fika."
+!define MUI_WELCOMEPAGE_TEXT "Welcome to DOKDOR's Fika Firewall Fixer for SPT 3.9.0. This will automatically remove any old broken rules, and add all the firewall rules needed to host and play Fika."
 
 ; Interface for the welcome page
 !insertmacro MUI_PAGE_WELCOME

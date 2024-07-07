@@ -57,6 +57,7 @@ Section FIREWALL
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\SPT.Launcher.exe" | Remove-NetFirewallRule'
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\Aki.Server.exe" | Remove-NetFirewallRule'
 	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallApplicationFilter -Program "$EXEDIR\Aki.Launcher.exe" | Remove-NetFirewallRule'
+	nsExec::Exec 'powershell -ExecutionPolicy Bypass -WindowStyle Hidden Get-NetFirewallRule -DisplayName "FIKA*" | Remove-NetFirewallRule'
     ; Add firewall rules for TCP 6969, UDP 25565, EFT and SPT. 
 	DetailPrint "Adding firewall rules..."
 	nsExec::Exec 'netsh advfirewall firewall add rule name="FIKA TCP 6969 IN" dir=in action=allow protocol=TCP localport=6969 enable=yes profile=public,private' SILENT
